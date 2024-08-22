@@ -1,23 +1,19 @@
+const EventEmmiter = require("events");
 
-var url = "htttp://mylogger.io/log"
+var url = "htttp://mylogger.io/log";
 
-function log(message){
-	//send an http request
-	
-	console.log(message)
+class Logger extends EventEmmiter {
+  log(message) {
+    //send a request
+    console.log(message);
+
+    //raise an event
+    this.emit("messageLogged", { id: 1, url: "https://" });
+    this.emit("logging", { user: "Isaac" });
+  }
 }
 
-
-// this is fine;
-// module.exports.log = log
-// module.exports.url = url
-
-// but alternatively; i'd do,
-module.exports ={
-	log,
-	url
-}
-
-console.log(module)
-
-
+module.exports = {
+  Logger,
+  url,
+};
